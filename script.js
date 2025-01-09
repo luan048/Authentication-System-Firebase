@@ -1,21 +1,14 @@
-import {initializeApp} from 'firebase/app'
-import {getAuth} from 'firebase/auth'
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from './firebaseConfig'
 
-fetch('./env.json')
-    .then((response) => response.json())
-    .then((env) => {
-        const firebaseConfig = {
-            apiKey: env.API_KEY,
-            authDomain: env.AUTH_DOMAIN,
-            projectId: env.PROJECT_ID,
-            storageBucket: env.STORAGE_BUCKET,
-            messagingSenderId: env.MESSAGING_SENDER_ID,
-            appId: env.APP_ID,
-        }
+function handleLogin(e) {
+    const email = document.getElementById('inputEmail').value
+    const password = document.getElementById('inputPassword').value
+    
+    e.preventDefault(e)
+    signInWithEmailAndPassword(auth, email, password)
+        
+}
 
-        const app = initializeApp(firebaseConfig)
-        const auth = getAuth(app)
-
-        console.log('Firebase iniciado com sucesso!')
-    })
-    .catch((error) => console.log('Erro ao inicial o env: ', error))
+const loginForm = document.getElementById('loginButton')
+loginForm.addEventListener('submit', handleLogin)
