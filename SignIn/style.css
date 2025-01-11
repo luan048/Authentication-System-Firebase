@@ -56,3 +56,8 @@ button:hover {
     background-color: black;
     color: white;
 }
+
+.linkToSignUp {
+    margin-top: 20px;
+    color: blue;
+}
